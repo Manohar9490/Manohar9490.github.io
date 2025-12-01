@@ -3,33 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manohar Killamsetti | AI & Data Specialist Portfolio</title>
+    <title>Manohar Killamsetti | Integrated Data & AI Value Chain Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #f0f4f8; /* Light blue-gray for clean look */
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #a9c6e5;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #60a5fa; /* Blue 400 */
-        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0f172a; } /* slate-900 */
+        ::-webkit-scrollbar-thumb { background: #34d399; border-radius: 4px; } /* emerald-400 */
+        ::-webkit-scrollbar-thumb:hover { background: #10b981; } /* emerald-500 */
         
-        /* Chart Container Styling */
+        /* Chart Container Styling - INCREASED HEIGHT FOR BETTER VISIBILITY */
         .chart-container {
             position: relative;
             width: 100%;
             max-width: 550px; 
             margin-left: auto;
             margin-right: auto;
-            height: 400px;
+            height: 500px; /* Increased height */
         }
         
         /* Animations */
@@ -43,293 +34,343 @@
 
         .card-hover:hover {
             transform: translateY(-4px);
-            box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
             transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
         
-        .timeline-node.active {
-            background-color: #dbeafe; /* Blue 100 */
-            border-color: #3b82f6; /* Blue 500 */
-            color: #1e3a8a; /* Blue 900 */
-            font-weight: 700;
+        .role-card {
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+        /* Style for the LLM insight box */
+        .insight-box {
+            background-color: #0f172a; /* slate-900 */
+            border: 1px solid #1e293b; /* slate-800 */
         }
     </style>
-    <!-- Chosen Palette: Indigo/Blue (Professional, Analytical, AI focus), Light Gray (Clean structure). 
-         Rationale: Indigo/Blue represents stability, intelligence, and the full scope of Data Engineering through Advanced AI/ML. -->
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans antialiased selection:bg-blue-200 selection:text-gray-900">
+<body class="bg-slate-900 text-slate-200 font-sans antialiased selection:bg-emerald-400 selection:text-slate-900">
 
     <!-- Navigation -->
-    <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-gray-200 shadow-lg">
+    <nav class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur border-b border-slate-800 shadow-xl">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
                 <div class="flex items-center">
-                    <span class="text-2xl font-bold text-gray-900 tracking-tight">MK<span class="text-indigo-600">.AI/Data</span></span>
+                    <span class="text-2xl font-extrabold tracking-tight text-white">MK<span class="text-emerald-400">.FullStackAI</span></span>
                 </div>
                 <div class="hidden md:flex space-x-8">
-                    <button onclick="scrollToSection('hero')" class="text-gray-600 hover:text-indigo-600 px-3 py-2 text-sm font-medium transition-colors">Overview</button>
-                    <button onclick="scrollToSection('skills')" class="text-gray-600 hover:text-indigo-600 px-3 py-2 text-sm font-medium transition-colors">T-Shape Profile</button>
-                    <button onclick="scrollToSection('experience')" class="text-gray-600 hover:text-indigo-600 px-3 py-2 text-sm font-medium transition-colors">Industry Impact</button>
-                    <button onclick="scrollToSection('projects')" class="text-gray-600 hover:text-indigo-600 px-3 py-2 text-sm font-medium transition-colors">Full-Stack Solutions</button>
+                    <button onclick="scrollToSection('hero')" class="text-slate-400 hover:text-emerald-400 px-3 py-2 text-sm font-medium transition-colors">Overview</button>
+                    <button onclick="scrollToSection('value-chain')" class="text-slate-400 hover:text-emerald-400 px-3 py-2 text-sm font-medium transition-colors">Value Chain Roles</button>
+                    <button onclick="scrollToSection('skills')" class="text-slate-400 hover:text-emerald-400 px-3 py-2 text-sm font-medium transition-colors">T-Shape Profile</button>
+                    <button onclick="scrollToSection('projects')" class="text-slate-400 hover:text-emerald-400 px-3 py-2 text-sm font-medium transition-colors">Case Studies</button>
                 </div>
                 <!-- Mobile Menu Button -->
                 <div class="flex md:hidden">
-                    <button onclick="toggleMobileMenu()" class="text-gray-600 hover:text-gray-900 p-2">
+                    <button onclick="toggleMobileMenu()" class="text-slate-400 hover:text-white p-2">
                         <span class="text-2xl">☰</span>
                     </button>
                 </div>
             </div>
         </div>
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full shadow-lg">
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-900 border-t border-slate-800 absolute w-full shadow-lg">
             <div class="px-2 pt-2 pb-3 space-y-1">
-                <button onclick="scrollToSection('hero'); toggleMobileMenu()" class="block w-full text-left px-4 py-3 text-base font-medium text-gray-600 hover:bg-gray-50">Overview</button>
-                <button onclick="scrollToSection('skills'); toggleMobileMenu()" class="block w-full text-left px-4 py-3 text-base font-medium text-gray-600 hover:bg-gray-50">T-Shape Profile</button>
-                <button onclick="scrollToSection('experience'); toggleMobileMenu()" class="block w-full text-left px-4 py-3 text-base font-medium text-gray-600 hover:bg-gray-50">Industry Impact</button>
-                <button onclick="scrollToSection('projects'); toggleMobileMenu()" class="block w-full text-left px-4 py-3 text-base font-medium text-gray-600 hover:bg-gray-50">Full-Stack Solutions</button>
+                <button onclick="scrollToSection('hero'); toggleMobileMenu()" class="block w-full text-left px-4 py-3 text-base font-medium text-slate-400 hover:bg-slate-800">Overview</button>
+                <button onclick="scrollToSection('value-chain'); toggleMobileMenu()" class="block w-full text-left px-4 py-3 text-base font-medium text-slate-400 hover:bg-slate-800">Value Chain Roles</button>
+                <button onclick="scrollToSection('skills'); toggleMobileMenu()" class="block w-full text-left px-4 py-3 text-base font-medium text-slate-400 hover:bg-slate-800">T-Shape Profile</button>
+                <button onclick="scrollToSection('projects'); toggleMobileMenu()" class="block w-full text-left px-4 py-3 text-base font-medium text-slate-400 hover:bg-slate-800">Case Studies</button>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section (Full-Spectrum Overview) -->
-    <section id="hero" class="relative pt-16 pb-20 lg:pt-24 lg:pb-28 overflow-hidden bg-white">
+    <section id="hero" class="relative pt-20 pb-24 lg:pt-32 lg:pb-36 overflow-hidden bg-slate-900">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center max-w-4xl mx-auto mb-16">
-                <div class="inline-flex items-center rounded-full bg-blue-50 px-4 py-1.5 text-sm font-semibold text-blue-700 mb-6 ring-1 ring-inset ring-blue-600/20">
-                    <span class="mr-2">✨</span> AI-Driven Software Engineer & Data Specialist (5+ Years)
+                <div class="inline-flex items-center rounded-full bg-emerald-900/40 px-4 py-1.5 text-sm font-semibold text-emerald-400 mb-6 ring-1 ring-inset ring-emerald-600/30 shadow-md">
+                    <span class="mr-2 text-lg">🔗</span> The Full Data Spectrum: DA, BA, BI, DS, ML
                 </div>
-                <h1 class="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-6xl mb-6">
+                <h1 class="text-5xl font-extrabold tracking-tight text-white sm:text-7xl mb-6">
                     Manohar Killamsetti
                 </h1>
-                <p class="text-xl text-gray-600 mb-8 leading-8">
-                    Bridging the gap between **Generative AI** and **Business Intelligence**. I specialize in building data pipelines, architecting robust BI solutions, and deploying intelligent systems (NLP, Document AI) that drive measurable business value.
+                <p class="text-xl text-slate-400 mb-10 leading-relaxed">
+                    An Integrated Data & AI Value Chain Specialist driving measurable business outcomes from raw data to deployed intelligence. Expertise spans Data Modeling (BI/BA), Predictive Analytics (DS), and Production AI/ML Engineering in secure cloud environments.
+                </p>
+                <div class="flex justify-center space-x-4">
+                     <a href="https://www.linkedin.com/in/manohar-killamsetti" target="_blank" class="px-6 py-3 bg-emerald-500 hover:bg-emerald-600 text-slate-900 font-bold rounded-xl shadow-lg transition-all transform hover:scale-[1.02] active:scale-[0.98]">
+                        LinkedIn Profile
+                    </a>
+                    <button onclick="scrollToSection('projects')" class="px-6 py-3 bg-slate-700 hover:bg-slate-600 text-white font-medium rounded-xl border border-slate-600 shadow-md transition-all">
+                        View Case Studies
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Data Value Chain Roles Mapping -->
+    <section id="value-chain" class="py-20 bg-slate-800 border-y border-slate-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-14 text-center">
+                <h2 class="text-4xl font-extrabold text-white">The Integrated Data Value Chain: Horizontal Breadth</h2>
+                <p class="mt-4 text-xl text-slate-400 max-w-6xl mx-auto">
+                    My background ensures zero gaps in the process: from understanding the business challenge (BA/DA) to designing the infrastructure (BI) and delivering the intelligent solution (DS/ML).
                 </p>
             </div>
+            
+            <!-- Conceptual Diagram Trigger -->
+            <div class="flex justify-center my-10">
+                
+            </div>
 
-            <!-- Core Pillars of Expertise -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
-                <div class="bg-gray-50 p-6 rounded-2xl border border-gray-200 text-center card-hover">
-                    <span class="text-4xl block mb-3">🧠</span>
-                    <div class="text-lg font-bold text-gray-900 mb-1">Deep AI/NLP</div>
-                    <div class="text-sm text-gray-500">Transformer Models, QLoRA, LangChain/RAG, Document AI.</div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+                
+                <!-- Role 1: Business Analyst (BA) - Breadth/Horizontal -->
+                <div class="bg-indigo-900/40 p-5 rounded-2xl border border-indigo-700/50 role-card shadow-lg card-hover">
+                    <span class="text-4xl block mb-3 text-indigo-400">📋</span>
+                    <h3 class="text-xl font-bold text-white mb-2">Business Analyst (BA)</h3>
+                    <p class="text-sm text-indigo-200 mb-3 font-mono font-semibold">T-Shape Breadth</p>
+                    <ul class="text-sm text-slate-300 space-y-1 list-disc pl-5">
+                        <li>Requirements: Translating needs into data features.</li>
+                        <li>Metrics: Defining KPIs and success criteria (Cognizant).</li>
+                    </ul>
                 </div>
-                <div class="bg-gray-50 p-6 rounded-2xl border border-gray-200 text-center card-hover">
-                    <span class="text-4xl block mb-3">📈</span>
-                    <div class="text-lg font-bold text-gray-900 mb-1">Data & BI Mastery</div>
-                    <div class="text-sm text-gray-500">Data Modeling (3NF/Star), SQL, Power BI, Tableau, ETL Automation.</div>
+                
+                <!-- Role 2: Data Analyst (DA) - Breadth/Horizontal -->
+                <div class="bg-blue-900/40 p-5 rounded-2xl border border-blue-700/50 role-card shadow-lg card-hover">
+                    <span class="text-4xl block mb-3 text-blue-400">🔍</span>
+                    <h3 class="text-xl font-bold text-white mb-2">Data Analyst (DA)</h3>
+                    <p class="text-sm text-blue-200 mb-3 font-mono font-semibold">T-Shape Breadth</p>
+                    <ul class="text-sm text-slate-300 space-y-1 list-disc pl-5">
+                        <li>EDA: Exploratory Data Analysis (Amazon, Tech Mahindra).</li>
+                        <li>Cleaning: Data QA and validation scripting (Python).</li>
+                    </ul>
                 </div>
-                <div class="bg-gray-50 p-6 rounded-2xl border border-gray-200 text-center card-hover">
-                    <span class="text-4xl block mb-3">🛠️</span>
-                    <div class="text-lg font-bold text-gray-900 mb-1">Software Delivery</div>
-                    <div class="text-sm text-gray-500">Python, JavaScript, React, FastAPI, AWS/SageMaker Deployment.</div>
+
+                <!-- Role 3: Business Intelligence (BI) - Breadth/Horizontal -->
+                <div class="bg-cyan-900/40 p-5 rounded-2xl border border-cyan-700/50 role-card shadow-lg card-hover">
+                    <span class="text-4xl block mb-3 text-cyan-400">📈</span>
+                    <h3 class="text-xl font-bold text-white mb-2">BI Specialist (BI)</h3>
+                    <p class="text-sm text-cyan-200 mb-3 font-mono font-semibold">T-Shape Breadth</p>
+                    <ul class="text-sm text-slate-300 space-y-1 list-disc pl-5">
+                        <li>Modeling: Star Schema design (E-Commerce project).</li>
+                        <li>Visualization: High-impact Power BI / Tableau dashboards.</li>
+                    </ul>
+                </div>
+                
+                <!-- Role 4: Data Scientist (DS) - Depth/Vertical -->
+                <div class="bg-emerald-900/40 p-5 rounded-2xl border border-emerald-700/50 role-card shadow-lg card-hover">
+                    <span class="text-4xl block mb-3 text-emerald-400">🧪</span>
+                    <h3 class="text-xl font-bold text-white mb-2">Data Scientist (DS)</h3>
+                    <p class="text-sm text-emerald-200 mb-3 font-mono font-semibold">T-Shape Depth</p>
+                    <ul class="text-sm text-slate-300 space-y-1 list-disc pl-5">
+                        <li>NLP: Designing NER/summarization pipelines (LayoutLM).</li>
+                        <li>R&D: Testing Generative AI architectures (QLoRA, RAG).</li>
+                    </ul>
+                </div>
+                
+                <!-- Role 5: ML Engineer (ML) - Depth/Vertical -->
+                <div class="bg-pink-900/40 p-5 rounded-2xl border border-pink-700/50 role-card shadow-lg card-hover">
+                    <span class="text-4xl block mb-3 text-pink-400">🚀</span>
+                    <h3 class="text-xl font-bold text-white mb-2">ML Engineer (ML)</h3>
+                    <p class="text-sm text-pink-200 mb-3 font-mono font-semibold">T-Shape Depth</p>
+                    <ul class="text-sm text-slate-300 space-y-1 list-disc pl-5">
+                        <li>Deployment: Scalable model serving (AWS SageMaker).</li>
+                        <li>API: Building FastAPI/React endpoints for full-stack delivery.</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- T-Shape Profile & Skills (Radar Chart) -->
-    <section id="skills" class="py-16 bg-gray-50 border-y border-gray-200">
+    <section id="skills" class="py-20 bg-slate-900 border-y border-slate-700">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="mb-12 text-center">
-                <h2 class="text-3xl font-bold text-gray-900">The T-Shaped Profile: Broad Foundation, Deep Specialization</h2>
-                <p class="mt-4 text-lg text-gray-600 max-w-4xl mx-auto">
-                    My expertise covers the full data lifecycle. I have a broad foundation in BI and Engineering, combined with deep vertical specialization in cutting-edge Generative AI and Document Understanding.
+            <div class="mb-14 text-center">
+                <h2 class="text-4xl font-extrabold text-white">T-Shape Proficiency & Deep Specialization</h2>
+                <p class="mt-4 text-xl text-slate-400 max-w-4xl mx-auto">
+                    Broad competence (the horizontal bar) across data infrastructure, with deep specialization (the vertical bar) in AI, NLP, and MLOps.
                 </p>
             </div>
-
+            
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <!-- Radar Chart Column -->
-                <div class="bg-white p-6 rounded-2xl shadow-xl border border-blue-100 h-[450px] flex items-center justify-center">
+                <!-- Specialization Details Column (Deep/ML Focus) -->
+                <div class="space-y-6">
+                    <h3 class="text-2xl font-bold text-emerald-400 border-b pb-2 border-slate-700">Deep AI/ML Specialization (The Vertical Bar)</h3>
+                    
+                    <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 card-hover cursor-default group">
+                        <h4 class="text-xl font-bold text-white">Generative AI & RAG Engineering</h4>
+                        <p class="text-slate-400 text-sm my-3">
+                            Designing and deploying systems that combine LLMs with proprietary knowledge for context-aware, grounded responses.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-emerald-900/40 text-emerald-400 text-xs rounded-full ring-1 ring-emerald-600/30">LangChain/LangGraph</span>
+                            <span class="px-3 py-1 bg-emerald-900/40 text-emerald-400 text-xs rounded-full ring-1 ring-emerald-600/30">MongoDB Vector Search</span>
+                            <span class="px-3 py-1 bg-emerald-900/40 text-emerald-400 text-xs rounded-full ring-1 ring-emerald-600/30">Prompt Engineering</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 card-hover cursor-default group">
+                        <h4 class="text-xl font-bold text-white">Production NLP & Document AI</h4>
+                        <p class="text-slate-400 text-sm my-3">
+                            Expertise in finetuning transformer models (QLoRA) for complex information extraction (NER, OCR) from semi-structured documents.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-pink-900/40 text-pink-400 text-xs rounded-full ring-1 ring-pink-600/30">LayoutLM</span>
+                            <span class="px-3 py-1 bg-pink-900/40 text-pink-400 text-xs rounded-full ring-1 ring-pink-600/30">QLoRA Finetuning</span>
+                            <span class="px-3 py-1 bg-pink-900/40 text-pink-400 text-xs rounded-full ring-1 ring-pink-600/30">AWS SageMaker</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Radar Chart Column (Breadth/T-Shape) -->
+                <div class="bg-slate-800 p-8 rounded-2xl shadow-2xl border border-slate-700 h-[500px] flex items-center justify-center">
                     <div class="chart-container">
                         <canvas id="skillsRadarChart"></canvas>
                     </div>
                 </div>
-
-                <!-- Specialization Details Column -->
-                <div class="space-y-6">
-                    <h3 class="text-2xl font-bold text-indigo-600 border-b pb-2 border-indigo-100">Deep Specialization: AI/NLP</h3>
-                    
-                    <div class="bg-white p-6 rounded-xl border border-gray-200 card-hover cursor-default group">
-                        <div class="flex items-center mb-3">
-                            <span class="w-10 h-10 flex items-center justify-center bg-indigo-100 text-indigo-600 rounded-lg text-xl mr-4 group-hover:bg-indigo-600 group-hover:text-white transition-colors">📄</span>
-                            <h4 class="text-lg font-bold text-gray-900">Document Intelligence (NER, OCR)</h4>
-                        </div>
-                        <p class="text-gray-600 text-sm mb-4">
-                            Expertise in fine-tuning transformer models (BERT, LayoutLM) for information extraction and summarization from semi-structured and scanned documents. Key to digitizing unstructured enterprise data.
-                        </p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="px-2 py-1 bg-indigo-50 text-indigo-700 text-xs rounded border border-indigo-100">LayoutLM</span>
-                            <span class="px-2 py-1 bg-indigo-50 text-indigo-700 text-xs rounded border border-indigo-100">NER/RE</span>
-                            <span class="px-2 py-1 bg-indigo-50 text-indigo-700 text-xs rounded border border-indigo-100">QLoRA</span>
-                        </div>
-                    </div>
-
-                    <div class="bg-white p-6 rounded-xl border border-gray-200 card-hover cursor-default group">
-                        <div class="flex items-center mb-3">
-                            <span class="w-10 h-10 flex items-center justify-center bg-green-100 text-green-600 rounded-lg text-xl mr-4 group-hover:bg-green-600 group-hover:text-white transition-colors">🔗</span>
-                            <h4 class="text-lg font-bold text-gray-900">Retrieval Augmented Generation (RAG)</h4>
-                        </div>
-                        <p class="text-gray-600 text-sm mb-4">
-                            Designing and deploying contextual chatbots using LangChain and vector embeddings (MongoDB Atlas) to enable real-time, accurate querying over proprietary data sources.
-                        </p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="px-2 py-1 bg-green-50 text-green-700 text-xs rounded border border-green-100">LangChain</span>
-                            <span class="px-2 py-1 bg-green-50 text-green-700 text-xs rounded border border-green-100">Vector Search</span>
-                            <span class="px-2 py-1 bg-green-50 text-green-700 text-xs rounded border border-green-100">MongoDB</span>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
 
-    <!-- Experience Timeline (Full Data Life Cycle) -->
-    <section id="experience" class="py-16 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="mb-12">
-                <h2 class="text-3xl font-bold text-gray-900">Industry Impact: From Data Quality to AI Deployment</h2>
-                <p class="mt-4 text-lg text-gray-600 max-w-3xl">
-                    Select an experience to see how I've contributed across the data spectrum—from solid BI foundations to deploying production-ready AI models.
-                </p>
-            </div>
-
-            <div class="flex flex-col lg:flex-row gap-8">
-                <!-- Timeline Navigation -->
-                <div class="lg:w-1/3 flex lg:flex-col overflow-x-auto lg:overflow-visible pb-4 lg:pb-0 space-x-4 lg:space-x-0 lg:space-y-4">
-                    <button onclick="renderExperience(0)" id="job-btn-0" class="timeline-node active text-left p-4 rounded-xl border border-gray-200 hover:bg-gray-50 transition-all min-w-[200px] lg:w-full">
-                        <div class="font-bold text-lg">Tech Mahindra</div>
-                        <div class="text-xs uppercase tracking-wide opacity-75 mt-1">Software Engineer (Data/BI)</div>
-                        <div class="text-xs opacity-60 mt-1">Feb 2023 – Aug 2024</div>
-                    </button>
-                    <button onclick="renderExperience(1)" id="job-btn-1" class="timeline-node text-left p-4 rounded-xl border border-gray-200 hover:bg-gray-50 transition-all min-w-[200px] lg:w-full">
-                        <div class="font-bold text-lg">Cognizant</div>
-                        <div class="text-xs uppercase tracking-wide opacity-75 mt-1">BI Consultant (NLP Focus)</div>
-                        <div class="text-xs opacity-60 mt-1">Jan 2022 – Jan 2023</div>
-                    </button>
-                    <button onclick="renderExperience(2)" id="job-btn-2" class="timeline-node text-left p-4 rounded-xl border border-gray-200 hover:bg-gray-50 transition-all min-w-[200px] lg:w-full">
-                        <div class="font-bold text-lg">Amazon</div>
-                        <div class="text-xs uppercase tracking-wide opacity-75 mt-1">Catalog Specialist (Data Quality)</div>
-                        <div class="text-xs opacity-60 mt-1">May 2019 – Jan 2022</div>
-                    </button>
-                </div>
-
-                <!-- Detail View -->
-                <div class="lg:w-2/3">
-                    <div id="experience-detail" class="bg-blue-50 border border-blue-100 rounded-2xl p-8 min-h-[350px] relative overflow-hidden">
-                        <!-- Content injected via JS -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- Project Showcase (Categorized Full-Stack Solutions) -->
-    <section id="projects" class="py-16 bg-gray-900 text-white">
+    <section id="projects" class="py-20 bg-slate-800 border-y border-slate-700">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-12">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-14">
                 <div>
-                    <h2 class="text-3xl font-bold">Full-Stack Solution Showcase</h2>
-                    <p class="mt-4 text-gray-400 max-w-2xl">
-                        A curated set of projects demonstrating end-to-end capability: from database design and BI visualization to deploying state-of-the-art Generative AI models.
+                    <h2 class="text-4xl font-extrabold text-white">Case Studies: End-to-End Solutions</h2>
+                    <p class="mt-4 text-xl text-slate-400 max-w-2xl">
+                        Projects demonstrating integrated capability across the data roles—from data structuring to deploying intelligent models.
                     </p>
                 </div>
-                <div class="mt-6 md:mt-0 flex gap-2">
-                    <button onclick="filterProjects('all')" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-lg text-sm font-medium transition-colors">All Solutions</button>
-                    <button onclick="filterProjects('ai')" class="px-4 py-2 bg-gray-800 hover:bg-gray-700 border border-gray-700 rounded-lg text-sm font-medium transition-colors">GenAI / NLP</button>
-                    <button onclick="filterProjects('bi')" class="px-4 py-2 bg-gray-800 hover:bg-gray-700 border border-gray-700 rounded-lg text-sm font-medium transition-colors">BI / Data Modeling</button>
+                <div class="mt-6 md:mt-0 flex gap-3">
+                    <button onclick="filterProjects('all', this)" class="px-5 py-2 bg-emerald-500 hover:bg-emerald-600 text-slate-900 font-bold rounded-lg text-sm transition-colors shadow-md active-filter">All Solutions</button>
+                    <button onclick="filterProjects('ai', this)" class="px-5 py-2 bg-slate-700 hover:bg-slate-600 border border-slate-600 text-white rounded-lg text-sm transition-colors">DS/ML/AI Focus</button>
+                    <button onclick="filterProjects('bi', this)" class="px-5 py-2 bg-slate-700 hover:bg-slate-600 border border-slate-600 text-white rounded-lg text-sm transition-colors">DA/BA/BI Focus</button>
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="project-grid">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="project-grid">
                 
-                <!-- Project 1: Document AI Pipeline (GenAI/NLP) -->
-                <div class="project-card bg-gray-800 rounded-xl border border-gray-700 overflow-hidden flex flex-col group" data-type="ai">
+                <!-- Project 1: Document AI Pipeline (DS/ML/ML Engineer) -->
+                <div class="project-card bg-slate-900 rounded-xl border border-slate-700 overflow-hidden flex flex-col group card-hover" data-type="ai">
                     <div class="p-6 flex-1">
                         <div class="flex justify-between items-start mb-4">
-                            <h3 class="text-xl font-bold text-white group-hover:text-pink-400 transition-colors">Document AI Pipeline (LayoutLM, QLoRA)</h3>
-                            <span class="bg-pink-900/50 text-pink-200 text-xs font-mono px-2 py-1 rounded border border-pink-700">NLP/MLOps</span>
+                            <h3 class="text-2xl font-bold text-white group-hover:text-emerald-400 transition-colors">Document AI Pipeline (NER, Summarization)</h3>
+                            <span class="bg-emerald-900/40 text-emerald-200 text-xs font-mono px-3 py-1 rounded-full border border-emerald-700/50">DS & ML</span>
                         </div>
-                        <p class="text-gray-300 text-sm mb-4 leading-relaxed">
-                            Fine-tuned transformer models (T5, BERT, LayoutLM) using QLoRA for **OCR, NER, and summarization** on complex scanned documents. Deployed on SageMaker for production readiness.
+                        <p class="text-slate-400 text-base mb-4 leading-relaxed" data-role-description="Fine-tuned transformer models using QLoRA for efficient information extraction (OCR, NER, summarization) from complex, scanned documents, solving a major Data Quality challenge.">
+                            Fine-tuned transformer models using QLoRA for efficient information extraction (OCR, NER, summarization) from complex, scanned documents, solving a major Data Quality challenge.
                         </p>
-                        <div class="space-y-2 border-t border-gray-700 pt-4">
-                            <div class="flex items-center text-sm text-gray-400">
-                                <span class="w-4 h-4 mr-2 bg-gray-700 rounded-full flex items-center justify-center text-[10px]">1</span>
-                                <span>Applied <strong>QLoRA</strong> for efficient model fine-tuning</span>
+                        <div class="space-y-2 border-t border-slate-700 pt-4">
+                            <div class="flex items-center text-sm text-slate-400">
+                                <span class="w-2 h-2 mr-2 rounded-full bg-emerald-400"></span>
+                                <span>Deployment on AWS SageMaker for scalable inference.</span>
                             </div>
-                            <div class="flex items-center text-sm text-gray-400">
-                                <span class="w-4 h-4 mr-2 bg-gray-700 rounded-full flex items-center justify-center text-[10px]">2</span>
-                                <span>Used <strong>LangChain</strong> for entity chaining and extraction</span>
+                            <div class="flex items-center text-sm text-slate-400">
+                                <span class="w-2 h-2 mr-2 rounded-full bg-emerald-400"></span>
+                                <span>Applied LayoutLM and Vector Embeddings for multi-modal context.</span>
                             </div>
+                        </div>
+                        
+                        <div class="mt-4 pt-4 border-t border-slate-700">
+                            <button onclick="getGeminiInsight(this)" class="w-full px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-white font-bold rounded-lg text-sm transition-colors flex items-center justify-center disabled:opacity-50" data-project-id="doc-ai-1">
+                                <span class="mr-2">✨</span> AI Insight Generator
+                            </button>
+                            <div id="insight-doc-ai-1" class="insight-box p-3 mt-3 text-sm text-slate-300 rounded-lg hidden"></div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Project 2: Sales Performance Dashboard (BI) -->
-                <div class="project-card bg-gray-800 rounded-xl border border-gray-700 overflow-hidden flex flex-col group" data-type="bi">
+                <!-- Project 2: E-Commerce Data Modeling (DA/BA/BI) -->
+                <div class="project-card bg-slate-900 rounded-xl border border-slate-700 overflow-hidden flex flex-col group card-hover" data-type="bi">
                     <div class="p-6 flex-1">
                         <div class="flex justify-between items-start mb-4">
-                            <h3 class="text-xl font-bold text-white group-hover:text-yellow-400 transition-colors">E-Commerce Data Modeling & BI Dashboard</h3>
-                            <span class="bg-yellow-900/50 text-yellow-200 text-xs font-mono px-2 py-1 rounded border border-yellow-700">Data Modeling</span>
+                            <h3 class="text-2xl font-bold text-white group-hover:text-cyan-400 transition-colors">E-Commerce Data Modeling & Sales BI</h3>
+                            <span class="bg-cyan-900/40 text-cyan-200 text-xs font-mono px-3 py-1 rounded-full border border-cyan-700/50">DA & BI</span>
                         </div>
-                        <p class="text-gray-300 text-sm mb-4 leading-relaxed">
-                            Designed a high-integrity **Star Schema** relational database using MySQL for the Olist E-Commerce dataset, directly feeding metrics into a Power BI dashboard.
+                        <p class="text-slate-400 text-base mb-4 leading-relaxed" data-role-description="Designed a Star Schema relational model (MySQL/Olist Dataset) to track customer behavior and sales. The result was a high-performance Power BI dashboard.">
+                            Designed a Star Schema relational model (MySQL/Olist Dataset) to track customer behavior and sales. The result was a high-performance Power BI dashboard.
                         </p>
-                        <div class="space-y-2 border-t border-gray-700 pt-4">
-                            <div class="flex items-center text-sm text-gray-400">
-                                <span class="w-4 h-4 mr-2 bg-gray-700 rounded-full flex items-center justify-center text-[10px]">1</span>
-                                <span>Optimized reports using advanced <strong>DAX</strong> calculations.</span>
+                        <div class="space-y-2 border-t border-slate-700 pt-4">
+                            <div class="flex items-center text-sm text-slate-400">
+                                <span class="w-2 h-2 mr-2 rounded-full bg-cyan-400"></span>
+                                <span>Optimized reports using advanced DAX calculations.</span>
                             </div>
-                            <div class="flex items-center text-sm text-gray-400">
-                                <span class="w-4 h-4 mr-2 bg-gray-700 rounded-full flex items-center justify-center text-[10px]">2</span>
-                                <span>Enforced data integrity via <strong>SQL Stored Procedures</strong>.</span>
+                            <div class="flex items-center text-sm text-slate-400">
+                                <span class="w-2 h-2 mr-2 rounded-full bg-cyan-400"></span>
+                                <span>Used SQL Stored Procedures to enforce data integrity and reusability.</span>
                             </div>
+                        </div>
+                        
+                        <div class="mt-4 pt-4 border-t border-slate-700">
+                            <button onclick="getGeminiInsight(this)" class="w-full px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-white font-bold rounded-lg text-sm transition-colors flex items-center justify-center disabled:opacity-50" data-project-id="ecommerce-bi-2">
+                                <span class="mr-2">✨</span> AI Insight Generator
+                            </button>
+                            <div id="insight-ecommerce-bi-2" class="insight-box p-3 mt-3 text-sm text-slate-300 rounded-lg hidden"></div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Project 3: Generative AI Chatbot (GenAI/NLP) -->
-                <div class="project-card bg-gray-800 rounded-xl border border-gray-700 overflow-hidden flex flex-col group" data-type="ai">
+                <!-- Project 3: Generative AI Chatbot (DS/ML) -->
+                <div class="project-card bg-slate-900 rounded-xl border border-slate-700 overflow-hidden flex flex-col group card-hover" data-type="ai">
                     <div class="p-6 flex-1">
                         <div class="flex justify-between items-start mb-4">
-                            <h3 class="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">Catering Services Chatbot (RAG/LangChain)</h3>
-                            <span class="bg-blue-900/50 text-blue-200 text-xs font-mono px-2 py-1 rounded border border-blue-700">GenAI/RAG</span>
+                            <h3 class="text-2xl font-bold text-white group-hover:text-pink-400 transition-colors">Catering Services Chatbot (RAG/LangChain)</h3>
+                            <span class="bg-pink-900/40 text-pink-200 text-xs font-mono px-3 py-1 rounded-full border border-pink-700/50">ML & DS</span>
                         </div>
-                        <p class="text-gray-300 text-sm mb-4 leading-relaxed">
-                            Developed a multi-turn, contextual chatbot leveraging RAG with MongoDB and LangChain. Provides real-time, accurate menu and catering information to customers.
+                        <p class="text-slate-400 text-base mb-4 leading-relaxed" data-role-description="Engineered a multi-turn, contextual chatbot using RAG architecture with MongoDB Atlas vector search and LangChain for accurate querying over internal documents.">
+                            Engineered a multi-turn, contextual chatbot using RAG architecture with MongoDB Atlas vector search and LangChain for accurate querying over internal documents.
                         </p>
-                        <div class="space-y-2 border-t border-gray-700 pt-4">
-                            <div class="flex items-center text-sm text-gray-400">
-                                <span class="w-4 h-4 mr-2 bg-gray-700 rounded-full flex items-center justify-center text-[10px]">1</span>
-                                <span>Used <strong>Vector Embeddings</strong> for knowledge retrieval.</span>
+                        <div class="space-y-2 border-t border-slate-700 pt-4">
+                            <div class="flex items-center text-sm text-slate-400">
+                                <span class="w-2 h-2 mr-2 rounded-full bg-pink-400"></span>
+                                <span>Deployed on Streamlit Cloud, managing session memory and context.</span>
                             </div>
-                            <div class="flex items-center text-sm text-gray-400">
-                                <span class="w-4 h-4 mr-2 bg-gray-700 rounded-full flex items-center justify-center text-[10px]">2</span>
-                                <span>Managed memory/context using <strong>LangChain workflows</strong>.</span>
+                            <div class="flex items-center text-sm text-slate-400">
+                                <span class="w-2 h-2 mr-2 rounded-full bg-pink-400"></span>
+                                <span>Optimized embeddings and retrieval strategy for semantic relevance.</span>
                             </div>
+                        </div>
+                        
+                        <div class="mt-4 pt-4 border-t border-slate-700">
+                            <button onclick="getGeminiInsight(this)" class="w-full px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-white font-bold rounded-lg text-sm transition-colors flex items-center justify-center disabled:opacity-50" data-project-id="catering-chatbot-3">
+                                <span class="mr-2">✨</span> AI Insight Generator
+                            </button>
+                            <div id="insight-catering-chatbot-3" class="insight-box p-3 mt-3 text-sm text-slate-300 rounded-lg hidden"></div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Project 4: EatFitGo (Full-Stack/ML) -->
-                <div class="project-card bg-gray-800 rounded-xl border border-gray-700 overflow-hidden flex flex-col group" data-type="bi">
+                <!-- Project 4: EatFitGo (BA/DA/ML) -->
+                <div class="project-card bg-slate-900 rounded-xl border border-slate-700 overflow-hidden flex flex-col group card-hover" data-type="bi">
                     <div class="p-6 flex-1">
                         <div class="flex justify-between items-start mb-4">
-                            <h3 class="text-xl font-bold text-white group-hover:text-green-400 transition-colors">EatFitGo – AI-Powered Health & Fitness App</h3>
-                            <span class="bg-green-900/50 text-green-200 text-xs font-mono px-2 py-1 rounded border border-green-700">Full-Stack/ML</span>
+                            <h3 class="text-2xl font-bold text-white group-hover:text-indigo-400 transition-colors">EatFitGo – AI-Powered Health & Fitness App</h3>
+                            <span class="bg-indigo-900/40 text-indigo-200 text-xs font-mono px-3 py-1 rounded-full border border-indigo-700/50">BA & ML</span>
                         </div>
-                        <p class="text-gray-300 text-sm mb-4 leading-relaxed">
-                            Full-stack mobile app (React Native) with an **OpenAI-powered meal recommendation** engine. Manages user tracking and dynamically generates personalized nutrition goals.
+                        <p class="text-slate-400 text-base mb-4 leading-relaxed" data-role-description="Full-stack mobile app (React Native, Express, MongoDB) featuring an OpenAI-driven recommendation engine for personalized nutrition plans.">
+                            Full-stack mobile app (React Native, Express, MongoDB) featuring an OpenAI-driven recommendation engine for personalized nutrition plans.
                         </p>
-                        <div class="space-y-2 border-t border-gray-700 pt-4">
-                            <div class="flex items-center text-sm text-gray-400">
-                                <span class="w-4 h-4 mr-2 bg-gray-700 rounded-full flex items-center justify-center text-[10px]">1</span>
-                                <span>Implemented <strong>Express/MongoDB</strong> backend services.</span>
+                        <div class="space-y-2 border-t border-slate-700 pt-4">
+                            <div class="flex items-center text-sm text-slate-400">
+                                <span class="w-2 h-2 mr-2 rounded-full bg-indigo-400"></span>
+                                <span>Defined user tracking and goal metrics based on health inputs.</span>
                             </div>
-                            <div class="flex items-center text-sm text-gray-400">
-                                <span class="w-4 h-4 mr-2 bg-gray-700 rounded-full flex items-center justify-center text-[10px]">2</span>
-                                <span>Used API to dynamically generate <strong>personalized plans</strong>.</span>
+                            <div class="flex items-center text-sm text-slate-400">
+                                <span class="w-2 h-2 mr-2 rounded-full bg-indigo-400"></span>
+                                <span>Integrated API calls to dynamically generate personalized recommendations.</span>
                             </div>
+                        </div>
+                        
+                        <div class="mt-4 pt-4 border-t border-slate-700">
+                            <button onclick="getGeminiInsight(this)" class="w-full px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-white font-bold rounded-lg text-sm transition-colors flex items-center justify-center disabled:opacity-50" data-project-id="eatfitgo-4">
+                                <span class="mr-2">✨</span> AI Insight Generator
+                            </button>
+                            <div id="insight-eatfitgo-4" class="insight-box p-3 mt-3 text-sm text-slate-300 rounded-lg hidden"></div>
                         </div>
                     </div>
                 </div>
@@ -339,23 +380,23 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-white border-t border-gray-200 py-12">
+    <footer class="bg-slate-900 border-t border-slate-700 py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center">
             <div class="mb-6 md:mb-0 text-center md:text-left">
-                <h4 class="text-lg font-bold text-gray-900">Education Foundation</h4>
-                <div class="mt-2">
-                    <p class="text-gray-800 font-medium">MS in Computer Science (GPA 3.94)</p>
-                    <p class="text-gray-500 text-sm">Pace University, New York | Aug 2024 - May 2026</p>
+                <h4 class="text-xl font-bold text-white">Education Foundation</h4>
+                <div class="mt-3 space-y-1">
+                    <p class="text-slate-200 font-medium">MS in Computer Science (GPA 3.94)</p>
+                    <p class="text-slate-400 text-sm">Pace University, New York | Aug 2024 – May 2026</p>
                 </div>
-                <div class="mt-2">
-                    <p class="text-gray-800 font-medium">B.Tech in Mechanical Engineering</p>
-                    <p class="text-gray-500 text-sm">Andhra University, India | 2014 - 2018</p>
+                <div class="mt-2 space-y-1">
+                    <p class="text-slate-200 font-medium">B.Tech in Mechanical Engineering</p>
+                    <p class="text-slate-400 text-sm">Andhra University, India | 2014 – 2018</p>
                 </div>
             </div>
-            <div class="flex flex-col items-center md:items-end">
-                <div class="text-gray-500 text-sm mb-2">New Jersey, NJ 07306</div>
-                <div class="text-gray-500 text-sm mb-2">(201) 920-7321</div>
-                <p class="text-xs text-gray-400 mt-4">© 2025 Manohar Killamsetti. AI & Data Specialist Portfolio.</p>
+            <div class="flex flex-col items-center md:items-end text-right">
+                <div class="text-slate-400 text-sm mb-2">New Jersey, NJ 07306</div>
+                <div class="text-slate-400 text-sm mb-2">(201) 920-7321</div>
+                <p class="text-xs text-slate-600 mt-4">© 2025 Manohar Killamsetti. Integrated Data & AI Portfolio.</p>
             </div>
         </div>
     </footer>
@@ -363,178 +404,182 @@
     <!-- JS Logic -->
     <script>
         // --- DATA STORE ---
-        const experienceData = [
-            {
-                company: "Tech Mahindra (Client: Micron)",
-                role: "Software Engineer (Data/BI)",
-                period: "Feb 2023 – Aug 2024",
-                highlight: "Data Modeling and BI Automation",
-                description: "Focused on optimizing data delivery for critical BI reports. Automated ETL processes using Python, structured data within Snowflake, and maintained primary data models supporting financial reports. Achieved a 40% reduction in manual reporting time, bridging the gap between raw data and business insight.",
-                impacts: [
-                    "Achieved 40% reduction in reporting lead time via Python automation.",
-                    "Managed and optimized Tableau Server performance for executive dashboards.",
-                    "Designed and maintained the primary data model supporting financial reports."
-                ],
-                tech: ["Power BI", "Python (Pandas)", "Snowflake", "ETL Automation", "SQL"]
-            },
-            {
-                company: "Cognizant (Client: DocuSign)",
-                role: "BI Consultant (NLP Focus)",
-                period: "Jan 2022 – Jan 2023",
-                highlight: "NLP-based Metadata Structuring and BI",
-                description: "Developed BI solutions for client success teams. Beyond standard reporting, I contributed to metadata structuring and implemented Natural Language Processing (NLP) techniques to extract insights from semi-structured business documents, directly contributing to accurate BI data feeds.",
-                impacts: [
-                    "Analyzed business documents to structure metadata for NLP applications.",
-                    "Automated ETL pipelines and built foundational BI dashboards (Power BI/Tableau).",
-                    "Contributed to NLP-based insights for improved customer segmentation."
-                ],
-                tech: ["Tableau", "Power BI", "Data Modeling", "NLP", "SQL"]
-            },
-            {
-                company: "Amazon",
-                role: "Catalog Specialist (Data Quality)",
-                period: "May 2019 – Jan 2022",
-                highlight: "Data Quality and Scripting Automation",
-                description: "Ensured the integrity of massive product catalog data. This involved writing Python scripts for quality assurance (QA) and data cleansing in large document workflows, ensuring reliable, high-quality data was consistently available for operational dashboards and BI systems.",
-                impacts: [
-                    "Built Python automation scripts for QA and data cleansing (20% error reduction).",
-                    "Supported tools for structured data extraction and labeling.",
-                    "Ensured high data quality feeding into downstream BI systems."
-                ],
-                tech: ["Python", "SQL", "Data Quality", "EDA", "Excel"]
-            }
-        ];
+        const skillData = {
+            // Note: Data labels were slightly adjusted for better fit on the radar chart
+            labels: ['BI/BA (Reporting)', 'Data Engineering (ETL, SQL)', 'Data Science (Modeling, NLP)', 'ML Engineering (Deployment)'],
+            scores: [9, 8, 9, 9],
+        };
+        
+        const apiKey = ""; // API Key for Gemini
+        const apiUrl = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent";
 
-        // // --- CHART CONFIG ---
-        // const ctxRadar = document.getElementById('skillsRadarChart').getContext('2d');
-        // let radarChart;
 
-        // const skillData = {
-        //     labels: ['Generative AI/RAG', 'BI/Reporting (Power BI, DAX)', 'Data Engineering (ETL/Snowflake)', 'Data Science/ML (Scikit-learn)'],
-        //     scores: [10, 9, 8, 8], // Scoring reflects strong AI/BI focus, solid engineering foundation
-        // };
-
-        // // --- FUNCTIONS ---
-
-        // function init() {
-        //     // Init Radar Chart
-        //     radarChart = new Chart(ctxRadar, {
-        //         type: 'radar',
-        //         data: {
-        //             labels: skillData.labels,
-        //             datasets: [{
-        //                 label: 'Proficiency Score (10=Max)',
-        //                 data: skillData.scores,
-        //                 backgroundColor: 'rgba(59, 130, 246, 0.2)', // Blue 500
-        //                 borderColor: 'rgb(59, 130, 246)', 
-        //                 pointBackgroundColor: 'rgb(59, 130, 246)',
-        //                 pointBorderColor: '#fff',
-        //                 pointHoverBackgroundColor: '#fff',
-        //                 pointHoverBorderColor: 'rgb(59, 130, 246)',
-        //                 borderWidth: 2
-        //             }]
-        //         },
-        //         options: {
-        //             responsive: true,
-        //             maintainAspectRatio: false,
-        //             elements: {
-        //                 line: {
-        //                     borderWidth: 3
-        //                 }
-        //             },
-        //             scales: {
-        //                 r: {
-        //                     angleLines: { color: 'rgba(0, 0, 0, 0.1)' },
-        //                     grid: { color: 'rgba(0, 0, 0, 0.1)' },
-        //                     pointLabels: {
-        //                         font: { size: 14, weight: '600' },
-        //                         color: '#1f2937' // Gray 800
-        //                     },
-        //                     suggestedMin: 0,
-        //                     suggestedMax: 10,
-        //                     ticks: {
-        //                         display: false,
-        //                         maxTicksLimit: 5
-        //                     },
-        //                 }
-        //             },
-        //             plugins: {
-        //                 legend: { display: false },
-        //                 tooltip: {
-        //                     callbacks: {
-        //                         label: function(context) {
-        //                             return `${context.label}: ${context.raw}/10`;
-        //                         }
-        //                     }
-        //                 }
-        //             }
-        //         }
-        //     });
-
-            // Init Experience
-        //     renderExperience(0);
-        // }
-
-        function renderExperience(index) {
-            // Update Navigation Styles
-            document.querySelectorAll('.timeline-node').forEach((btn, i) => {
-                if (i === index) {
-                    btn.classList.add('active');
-                    btn.classList.remove('hover:bg-gray-50');
-                } else {
-                    btn.classList.remove('active');
-                    btn.classList.add('hover:bg-gray-50');
-                }
-            });
-
-            const data = experienceData[index];
-            const container = document.getElementById('experience-detail');
-            
-            // Build Tech Tags
-            const tags = data.tech.map(t => `<span class="inline-block bg-white border border-blue-200 text-blue-600 text-xs px-2 py-1 rounded shadow-sm">${t}</span>`).join(' ');
-
-            container.innerHTML = `
-                <div class="animate-fade-in h-full flex flex-col">
-                    <div class="flex justify-between items-start mb-4">
-                        <div>
-                            <h3 class="text-2xl font-bold text-gray-900">${data.role}</h3>
-                            <div class="text-gray-600 font-medium text-lg">${data.company}</div>
-                        </div>
-                        <div class="bg-blue-200 text-blue-800 px-3 py-1 rounded text-xs font-bold uppercase tracking-wider">${data.period}</div>
-                    </div>
-                    
-                    <div class="mb-6 bg-white border border-gray-200 p-4 rounded-lg shadow-md">
-                        <span class="text-xs font-bold text-blue-700 uppercase block mb-1">Focus Area</span>
-                        <p class="text-gray-800 font-medium">${data.highlight}</p>
-                    </div>
-
-                    <p class="text-gray-700 mb-6 leading-relaxed">${data.description}</p>
-                    
-                    <div class="mb-6">
-                        <h4 class="text-sm font-bold text-gray-900 mb-2 uppercase tracking-wide">Key Outcomes & Technical Contributions</h4>
-                        <ul class="space-y-2">
-                            ${data.impacts.map(impact => `<li class="flex items-start"><span class="text-blue-500 mr-2">✅</span><span class="text-gray-700 text-sm">${impact}</span></li>`).join('')}
-                        </ul>
-                    </div>
-
-                    <div class="mt-auto pt-6 border-t border-blue-200 flex flex-wrap gap-2">
-                        <span class="text-sm font-semibold text-gray-700 mr-2">Tech Stack:</span>
-                        ${tags}
-                    </div>
-                </div>
-            `;
+        // --- UTILITY FUNCTIONS ---
+        function getProjectDescription(button) {
+            return button.closest('.project-card').querySelector('[data-role-description]').getAttribute('data-role-description');
         }
 
-        function filterProjects(type) {
+        async function fetchWithRetry(url, options, maxRetries = 5) {
+            for (let i = 0; i < maxRetries; i++) {
+                try {
+                    const response = await fetch(url, options);
+                    if (response.status !== 429) {
+                        return response;
+                    }
+                } catch (error) {
+                    // Log error but continue with retry logic
+                }
+                const delay = Math.pow(2, i) * 1000 + Math.random() * 1000;
+                await new Promise(resolve => setTimeout(resolve, delay));
+            }
+            throw new Error('Max retries exceeded');
+        }
+
+        // --- GEMINI API INTEGRATION ---
+        async function getGeminiInsight(button) {
+            const projectId = button.getAttribute('data-project-id');
+            const insightBox = document.getElementById(`insight-${projectId}`);
+            const projectText = getProjectDescription(button);
+
+            button.disabled = true;
+            button.innerHTML = '<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Generating Insight...';
+            insightBox.classList.remove('hidden');
+            insightBox.innerHTML = '<p class="text-center text-slate-500">Analyzing project for key takeaways...</p>';
+
+
+            const systemPrompt = "You are a specialized AI Interview Assistant. Analyze the provided project description and provide a single, concise paragraph (max 4 sentences). The paragraph must focus on two things: 1) The quantifiable business impact or problem solved, and 2) The most advanced technical skill demonstrated (e.g., MLOps, RAG, Star Schema design). Use confident, professional language.";
+            const userQuery = `Analyze the following project description: "${projectText}"`;
+
+            const payload = {
+                contents: [{ parts: [{ text: userQuery }] }],
+                systemInstruction: {
+                    parts: [{ text: systemPrompt }]
+                },
+            };
+
+            try {
+                const response = await fetchWithRetry(`${apiUrl}?key=${apiKey}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const result = await response.json();
+                const generatedText = result.candidates?.[0]?.content?.parts?.[0]?.text || "Failed to generate insight.";
+                
+                insightBox.innerHTML = `<span class="font-bold text-emerald-400">Gemini Insight:</span> ${generatedText}`;
+
+            } catch (error) {
+                console.error("Gemini API Error:", error);
+                insightBox.innerHTML = `<span class="font-bold text-red-400">Error:</span> Could not generate insight. Please try again.`;
+            } finally {
+                button.disabled = false;
+                button.innerHTML = '<span class="mr-2">✨</span> AI Insight Generator';
+            }
+        }
+
+        // --- UI LOGIC ---
+        let radarChart;
+
+        function init() {
+            // Init Radar Chart
+            const ctxRadar = document.getElementById('skillsRadarChart').getContext('2d');
+            
+            // Adjusting options for better visibility and less clutter
+            radarChart = new Chart(ctxRadar, {
+                type: 'radar',
+                data: {
+                    labels: skillData.labels,
+                    datasets: [{
+                        label: 'Proficiency Score (10=Max)',
+                        data: skillData.scores,
+                        backgroundColor: 'rgba(52, 211, 153, 0.25)', // Emerald 400 - slightly more visible fill
+                        borderColor: 'rgb(52, 211, 153)', 
+                        pointBackgroundColor: 'rgb(52, 211, 153)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(52, 211, 153)',
+                        borderWidth: 3 // Thicker line
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    elements: { 
+                        line: { borderWidth: 3 },
+                        point: { radius: 5 } // Slightly larger points
+                    },
+                    scales: {
+                        r: {
+                            // Point Labels (Skill Names)
+                            pointLabels: {
+                                font: { size: 15, weight: '700' }, // Bolder, slightly larger font
+                                color: '#e2e8f0', /* slate-200 */
+                                padding: 25 // Increased padding to separate labels further
+                            },
+                            // Grid and Angle Lines
+                            angleLines: { color: 'rgba(255, 255, 255, 0.15)' },
+                            grid: { color: 'rgba(255, 255, 255, 0.3)', lineWidth: 1.5 }, // Brighter, thicker grid lines
+                            
+                            // Scale Configuration (0 to 10)
+                            suggestedMin: 0,
+                            suggestedMax: 10,
+                            ticks: { 
+                                display: true, // Show numeric ticks for context
+                                color: '#fff', // White ticks
+                                backdropColor: 'rgba(30, 41, 59, 0.8)', // Slate-800 backdrop for contrast
+                                font: { size: 11, weight: 'bold' },
+                                stepSize: 5, // Show ticks at 0, 5, 10
+                                z: 1 // Ensure ticks render above grid lines
+                            },
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.label}: ${context.raw}/10`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function filterProjects(type, clickedButton) {
             const cards = document.querySelectorAll('.project-card');
+            const buttons = clickedButton.parentNode.querySelectorAll('button');
+
+            // Update button styles
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-emerald-500', 'text-slate-900', 'font-bold');
+                btn.classList.add('bg-slate-700', 'text-white', 'border', 'border-slate-600', 'font-medium');
+            });
+            // This is the active state style
+            clickedButton.classList.add('bg-emerald-500', 'text-slate-900', 'font-bold');
+            clickedButton.classList.remove('bg-slate-700', 'text-white', 'border', 'border-slate-600', 'font-medium');
+
+
             cards.forEach(card => {
-                if(type === 'all' || card.dataset.type === type) {
+                const cardType = card.dataset.type;
+
+                if(type === 'all' || cardType === type) {
                     card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+                
+                // Reset and re-apply animation for smoother filter
+                if (card.style.display === 'flex') {
                     card.classList.remove('animate-fade-in');
                     void card.offsetWidth; 
                     card.classList.add('animate-fade-in');
-                } else {
-                    card.style.display = 'none';
                 }
             });
         }
