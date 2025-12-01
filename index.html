@@ -3,91 +3,553 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manohar Killamsetti - Portfolio</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>Manohar Killamsetti | AI & Data Specialist Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f0f4f8; /* Light blue-gray for clean look */
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #a9c6e5;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #60a5fa; /* Blue 400 */
+        }
+        
+        /* Chart Container Styling */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 550px; 
+            margin-left: auto;
+            margin-right: auto;
+            height: 400px;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        
+        .timeline-node.active {
+            background-color: #dbeafe; /* Blue 100 */
+            border-color: #3b82f6; /* Blue 500 */
+            color: #1e3a8a; /* Blue 900 */
+            font-weight: 700;
+        }
+    </style>
+    <!-- Chosen Palette: Indigo/Blue (Professional, Analytical, AI focus), Light Gray (Clean structure). 
+         Rationale: Indigo/Blue represents stability, intelligence, and the full scope of Data Engineering through Advanced AI/ML. -->
 </head>
-<body>
-<nav>
-    <div class="container">
-        <h1>Manohar Killamsetti</h1>
-        <ul>
-            <li><a href="#about">About</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#resume">Resume</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </div>
-</nav>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased selection:bg-blue-200 selection:text-gray-900">
 
-<header>
-    <div class="container">
-        <h2>Hello, I'm <span>Manohar Killamsetti</span></h2>
-        <p>Software Developer | Data Analyst | AI/ML Enthusiast</p>
-        <img src="images/profile.jpg" alt="Manohar Killamsetti" class="profile-pic">
-        <a href="#projects" class="btn">See My Work</a>
-    </div>
-</header>
-
-<section id="about">
-    <div class="container">
-        <h2>About Me</h2>
-        <p>I am a Master’s student in Computer Science at Pace University with 5+ years of professional experience across software development, data analytics, and AI/ML applications. I specialize in full-stack development, cloud platforms, and leveraging AI/ML models to build intelligent, scalable solutions.</p>
-    </div>
-</section>
-
-<section id="skills">
-    <div class="container">
-        <h2>Skills</h2>
-        <h3>Programming & Development</h3>
-        <p>Python, JavaScript (React.js), SQL, FastAPI, HTML/CSS</p>
-        <h3>Data Analytics & BI</h3>
-        <p>Power BI, Tableau, Snowflake, MongoDB, AWS</p>
-        <h3>Artificial Intelligence & ML</h3>
-        <p>Scikit-Learn, TensorFlow, OpenAI API, Prompt Engineering</p>
-    </div>
-</section>
-
-<section id="projects">
-    <div class="container">
-        <h2>Projects</h2>
-        <div class="project">
-            <h3>EatFitGo – AI-Enhanced Fitness App</h3>
-            <p>Built using React Native, FastAPI, MongoDB, OpenAI API to track steps, calories, and provide personalized diet plans.</p>
-            <a href="https://github.com/Manohar9490/EatFitGo" target="_blank">View Project</a>
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-gray-200 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center">
+                    <span class="text-2xl font-bold text-gray-900 tracking-tight">MK<span class="text-indigo-600">.AI/Data</span></span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <button onclick="scrollToSection('hero')" class="text-gray-600 hover:text-indigo-600 px-3 py-2 text-sm font-medium transition-colors">Overview</button>
+                    <button onclick="scrollToSection('skills')" class="text-gray-600 hover:text-indigo-600 px-3 py-2 text-sm font-medium transition-colors">T-Shape Profile</button>
+                    <button onclick="scrollToSection('experience')" class="text-gray-600 hover:text-indigo-600 px-3 py-2 text-sm font-medium transition-colors">Industry Impact</button>
+                    <button onclick="scrollToSection('projects')" class="text-gray-600 hover:text-indigo-600 px-3 py-2 text-sm font-medium transition-colors">Full-Stack Solutions</button>
+                </div>
+                <!-- Mobile Menu Button -->
+                <div class="flex md:hidden">
+                    <button onclick="toggleMobileMenu()" class="text-gray-600 hover:text-gray-900 p-2">
+                        <span class="text-2xl">☰</span>
+                    </button>
+                </div>
+            </div>
         </div>
-        <div class="project">
-            <h3>AI-Powered Chatbot</h3>
-            <p>Developed a catering service chatbot using OpenAI APIs and MongoDB for smart conversations.</p>
-            <a href="https://github.com/Manohar9490/AI-Chatbot" target="_blank">View Project</a>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full shadow-lg">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <button onclick="scrollToSection('hero'); toggleMobileMenu()" class="block w-full text-left px-4 py-3 text-base font-medium text-gray-600 hover:bg-gray-50">Overview</button>
+                <button onclick="scrollToSection('skills'); toggleMobileMenu()" class="block w-full text-left px-4 py-3 text-base font-medium text-gray-600 hover:bg-gray-50">T-Shape Profile</button>
+                <button onclick="scrollToSection('experience'); toggleMobileMenu()" class="block w-full text-left px-4 py-3 text-base font-medium text-gray-600 hover:bg-gray-50">Industry Impact</button>
+                <button onclick="scrollToSection('projects'); toggleMobileMenu()" class="block w-full text-left px-4 py-3 text-base font-medium text-gray-600 hover:bg-gray-50">Full-Stack Solutions</button>
+            </div>
         </div>
-        <div class="project">
-            <h3>Business KPI Dashboard</h3>
-            <p>Created dashboards visualizing KPIs using Power BI and SQL.</p>
+    </nav>
+
+    <!-- Hero Section (Full-Spectrum Overview) -->
+    <section id="hero" class="relative pt-16 pb-20 lg:pt-24 lg:pb-28 overflow-hidden bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-4xl mx-auto mb-16">
+                <div class="inline-flex items-center rounded-full bg-blue-50 px-4 py-1.5 text-sm font-semibold text-blue-700 mb-6 ring-1 ring-inset ring-blue-600/20">
+                    <span class="mr-2">✨</span> AI-Driven Software Engineer & Data Specialist (5+ Years)
+                </div>
+                <h1 class="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-6xl mb-6">
+                    Manohar Killamsetti
+                </h1>
+                <p class="text-xl text-gray-600 mb-8 leading-8">
+                    Bridging the gap between **Generative AI** and **Business Intelligence**. I specialize in building data pipelines, architecting robust BI solutions, and deploying intelligent systems (NLP, Document AI) that drive measurable business value.
+                </p>
+            </div>
+
+            <!-- Core Pillars of Expertise -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+                <div class="bg-gray-50 p-6 rounded-2xl border border-gray-200 text-center card-hover">
+                    <span class="text-4xl block mb-3">🧠</span>
+                    <div class="text-lg font-bold text-gray-900 mb-1">Deep AI/NLP</div>
+                    <div class="text-sm text-gray-500">Transformer Models, QLoRA, LangChain/RAG, Document AI.</div>
+                </div>
+                <div class="bg-gray-50 p-6 rounded-2xl border border-gray-200 text-center card-hover">
+                    <span class="text-4xl block mb-3">📈</span>
+                    <div class="text-lg font-bold text-gray-900 mb-1">Data & BI Mastery</div>
+                    <div class="text-sm text-gray-500">Data Modeling (3NF/Star), SQL, Power BI, Tableau, ETL Automation.</div>
+                </div>
+                <div class="bg-gray-50 p-6 rounded-2xl border border-gray-200 text-center card-hover">
+                    <span class="text-4xl block mb-3">🛠️</span>
+                    <div class="text-lg font-bold text-gray-900 mb-1">Software Delivery</div>
+                    <div class="text-sm text-gray-500">Python, JavaScript, React, FastAPI, AWS/SageMaker Deployment.</div>
+                </div>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<section id="resume">
-    <div class="container">
-        <h2>Resume</h2>
-        <a href="/path/to/your-resume.pdf" class="btn" target="_blank">Download My Resume</a>
-    </div>
-</section>
+    <!-- T-Shape Profile & Skills (Radar Chart) -->
+    <section id="skills" class="py-16 bg-gray-50 border-y border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-12 text-center">
+                <h2 class="text-3xl font-bold text-gray-900">The T-Shaped Profile: Broad Foundation, Deep Specialization</h2>
+                <p class="mt-4 text-lg text-gray-600 max-w-4xl mx-auto">
+                    My expertise covers the full data lifecycle. I have a broad foundation in BI and Engineering, combined with deep vertical specialization in cutting-edge Generative AI and Document Understanding.
+                </p>
+            </div>
 
-<section id="contact">
-    <div class="container">
-        <h2>Contact Me</h2>
-        <p>Email: <a href="mailto:manoharkillamsetti@gmail.com">manoharkillamsetti@gmail.com</a></p>
-        <p>LinkedIn: <a href="https://linkedin.com/in/manohar-killamsetti" target="_blank">linkedin.com/in/manohar-killamsetti</a></p>
-        <p>GitHub: <a href="https://github.com/Manohar9490" target="_blank">github.com/Manohar9490</a></p>
-    </div>
-</section>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Radar Chart Column -->
+                <div class="bg-white p-6 rounded-2xl shadow-xl border border-blue-100 h-[450px] flex items-center justify-center">
+                    <div class="chart-container">
+                        <canvas id="skillsRadarChart"></canvas>
+                    </div>
+                </div>
 
-<footer>
-    <div class="container">
-        <p>&copy; 2025 Manohar Killamsetti. All rights reserved.</p>
-    </div>
-</footer>
+                <!-- Specialization Details Column -->
+                <div class="space-y-6">
+                    <h3 class="text-2xl font-bold text-indigo-600 border-b pb-2 border-indigo-100">Deep Specialization: AI/NLP</h3>
+                    
+                    <div class="bg-white p-6 rounded-xl border border-gray-200 card-hover cursor-default group">
+                        <div class="flex items-center mb-3">
+                            <span class="w-10 h-10 flex items-center justify-center bg-indigo-100 text-indigo-600 rounded-lg text-xl mr-4 group-hover:bg-indigo-600 group-hover:text-white transition-colors">📄</span>
+                            <h4 class="text-lg font-bold text-gray-900">Document Intelligence (NER, OCR)</h4>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">
+                            Expertise in fine-tuning transformer models (BERT, LayoutLM) for information extraction and summarization from semi-structured and scanned documents. Key to digitizing unstructured enterprise data.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2 py-1 bg-indigo-50 text-indigo-700 text-xs rounded border border-indigo-100">LayoutLM</span>
+                            <span class="px-2 py-1 bg-indigo-50 text-indigo-700 text-xs rounded border border-indigo-100">NER/RE</span>
+                            <span class="px-2 py-1 bg-indigo-50 text-indigo-700 text-xs rounded border border-indigo-100">QLoRA</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl border border-gray-200 card-hover cursor-default group">
+                        <div class="flex items-center mb-3">
+                            <span class="w-10 h-10 flex items-center justify-center bg-green-100 text-green-600 rounded-lg text-xl mr-4 group-hover:bg-green-600 group-hover:text-white transition-colors">🔗</span>
+                            <h4 class="text-lg font-bold text-gray-900">Retrieval Augmented Generation (RAG)</h4>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">
+                            Designing and deploying contextual chatbots using LangChain and vector embeddings (MongoDB Atlas) to enable real-time, accurate querying over proprietary data sources.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2 py-1 bg-green-50 text-green-700 text-xs rounded border border-green-100">LangChain</span>
+                            <span class="px-2 py-1 bg-green-50 text-green-700 text-xs rounded border border-green-100">Vector Search</span>
+                            <span class="px-2 py-1 bg-green-50 text-green-700 text-xs rounded border border-green-100">MongoDB</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Timeline (Full Data Life Cycle) -->
+    <section id="experience" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-12">
+                <h2 class="text-3xl font-bold text-gray-900">Industry Impact: From Data Quality to AI Deployment</h2>
+                <p class="mt-4 text-lg text-gray-600 max-w-3xl">
+                    Select an experience to see how I've contributed across the data spectrum—from solid BI foundations to deploying production-ready AI models.
+                </p>
+            </div>
+
+            <div class="flex flex-col lg:flex-row gap-8">
+                <!-- Timeline Navigation -->
+                <div class="lg:w-1/3 flex lg:flex-col overflow-x-auto lg:overflow-visible pb-4 lg:pb-0 space-x-4 lg:space-x-0 lg:space-y-4">
+                    <button onclick="renderExperience(0)" id="job-btn-0" class="timeline-node active text-left p-4 rounded-xl border border-gray-200 hover:bg-gray-50 transition-all min-w-[200px] lg:w-full">
+                        <div class="font-bold text-lg">Tech Mahindra</div>
+                        <div class="text-xs uppercase tracking-wide opacity-75 mt-1">Software Engineer (Data/BI)</div>
+                        <div class="text-xs opacity-60 mt-1">Feb 2023 – Aug 2024</div>
+                    </button>
+                    <button onclick="renderExperience(1)" id="job-btn-1" class="timeline-node text-left p-4 rounded-xl border border-gray-200 hover:bg-gray-50 transition-all min-w-[200px] lg:w-full">
+                        <div class="font-bold text-lg">Cognizant</div>
+                        <div class="text-xs uppercase tracking-wide opacity-75 mt-1">BI Consultant (NLP Focus)</div>
+                        <div class="text-xs opacity-60 mt-1">Jan 2022 – Jan 2023</div>
+                    </button>
+                    <button onclick="renderExperience(2)" id="job-btn-2" class="timeline-node text-left p-4 rounded-xl border border-gray-200 hover:bg-gray-50 transition-all min-w-[200px] lg:w-full">
+                        <div class="font-bold text-lg">Amazon</div>
+                        <div class="text-xs uppercase tracking-wide opacity-75 mt-1">Catalog Specialist (Data Quality)</div>
+                        <div class="text-xs opacity-60 mt-1">May 2019 – Jan 2022</div>
+                    </button>
+                </div>
+
+                <!-- Detail View -->
+                <div class="lg:w-2/3">
+                    <div id="experience-detail" class="bg-blue-50 border border-blue-100 rounded-2xl p-8 min-h-[350px] relative overflow-hidden">
+                        <!-- Content injected via JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Showcase (Categorized Full-Stack Solutions) -->
+    <section id="projects" class="py-16 bg-gray-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12">
+                <div>
+                    <h2 class="text-3xl font-bold">Full-Stack Solution Showcase</h2>
+                    <p class="mt-4 text-gray-400 max-w-2xl">
+                        A curated set of projects demonstrating end-to-end capability: from database design and BI visualization to deploying state-of-the-art Generative AI models.
+                    </p>
+                </div>
+                <div class="mt-6 md:mt-0 flex gap-2">
+                    <button onclick="filterProjects('all')" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-lg text-sm font-medium transition-colors">All Solutions</button>
+                    <button onclick="filterProjects('ai')" class="px-4 py-2 bg-gray-800 hover:bg-gray-700 border border-gray-700 rounded-lg text-sm font-medium transition-colors">GenAI / NLP</button>
+                    <button onclick="filterProjects('bi')" class="px-4 py-2 bg-gray-800 hover:bg-gray-700 border border-gray-700 rounded-lg text-sm font-medium transition-colors">BI / Data Modeling</button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="project-grid">
+                
+                <!-- Project 1: Document AI Pipeline (GenAI/NLP) -->
+                <div class="project-card bg-gray-800 rounded-xl border border-gray-700 overflow-hidden flex flex-col group" data-type="ai">
+                    <div class="p-6 flex-1">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-xl font-bold text-white group-hover:text-pink-400 transition-colors">Document AI Pipeline (LayoutLM, QLoRA)</h3>
+                            <span class="bg-pink-900/50 text-pink-200 text-xs font-mono px-2 py-1 rounded border border-pink-700">NLP/MLOps</span>
+                        </div>
+                        <p class="text-gray-300 text-sm mb-4 leading-relaxed">
+                            Fine-tuned transformer models (T5, BERT, LayoutLM) using QLoRA for **OCR, NER, and summarization** on complex scanned documents. Deployed on SageMaker for production readiness.
+                        </p>
+                        <div class="space-y-2 border-t border-gray-700 pt-4">
+                            <div class="flex items-center text-sm text-gray-400">
+                                <span class="w-4 h-4 mr-2 bg-gray-700 rounded-full flex items-center justify-center text-[10px]">1</span>
+                                <span>Applied <strong>QLoRA</strong> for efficient model fine-tuning</span>
+                            </div>
+                            <div class="flex items-center text-sm text-gray-400">
+                                <span class="w-4 h-4 mr-2 bg-gray-700 rounded-full flex items-center justify-center text-[10px]">2</span>
+                                <span>Used <strong>LangChain</strong> for entity chaining and extraction</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2: Sales Performance Dashboard (BI) -->
+                <div class="project-card bg-gray-800 rounded-xl border border-gray-700 overflow-hidden flex flex-col group" data-type="bi">
+                    <div class="p-6 flex-1">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-xl font-bold text-white group-hover:text-yellow-400 transition-colors">E-Commerce Data Modeling & BI Dashboard</h3>
+                            <span class="bg-yellow-900/50 text-yellow-200 text-xs font-mono px-2 py-1 rounded border border-yellow-700">Data Modeling</span>
+                        </div>
+                        <p class="text-gray-300 text-sm mb-4 leading-relaxed">
+                            Designed a high-integrity **Star Schema** relational database using MySQL for the Olist E-Commerce dataset, directly feeding metrics into a Power BI dashboard.
+                        </p>
+                        <div class="space-y-2 border-t border-gray-700 pt-4">
+                            <div class="flex items-center text-sm text-gray-400">
+                                <span class="w-4 h-4 mr-2 bg-gray-700 rounded-full flex items-center justify-center text-[10px]">1</span>
+                                <span>Optimized reports using advanced <strong>DAX</strong> calculations.</span>
+                            </div>
+                            <div class="flex items-center text-sm text-gray-400">
+                                <span class="w-4 h-4 mr-2 bg-gray-700 rounded-full flex items-center justify-center text-[10px]">2</span>
+                                <span>Enforced data integrity via <strong>SQL Stored Procedures</strong>.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3: Generative AI Chatbot (GenAI/NLP) -->
+                <div class="project-card bg-gray-800 rounded-xl border border-gray-700 overflow-hidden flex flex-col group" data-type="ai">
+                    <div class="p-6 flex-1">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">Catering Services Chatbot (RAG/LangChain)</h3>
+                            <span class="bg-blue-900/50 text-blue-200 text-xs font-mono px-2 py-1 rounded border border-blue-700">GenAI/RAG</span>
+                        </div>
+                        <p class="text-gray-300 text-sm mb-4 leading-relaxed">
+                            Developed a multi-turn, contextual chatbot leveraging RAG with MongoDB and LangChain. Provides real-time, accurate menu and catering information to customers.
+                        </p>
+                        <div class="space-y-2 border-t border-gray-700 pt-4">
+                            <div class="flex items-center text-sm text-gray-400">
+                                <span class="w-4 h-4 mr-2 bg-gray-700 rounded-full flex items-center justify-center text-[10px]">1</span>
+                                <span>Used <strong>Vector Embeddings</strong> for knowledge retrieval.</span>
+                            </div>
+                            <div class="flex items-center text-sm text-gray-400">
+                                <span class="w-4 h-4 mr-2 bg-gray-700 rounded-full flex items-center justify-center text-[10px]">2</span>
+                                <span>Managed memory/context using <strong>LangChain workflows</strong>.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4: EatFitGo (Full-Stack/ML) -->
+                <div class="project-card bg-gray-800 rounded-xl border border-gray-700 overflow-hidden flex flex-col group" data-type="bi">
+                    <div class="p-6 flex-1">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-xl font-bold text-white group-hover:text-green-400 transition-colors">EatFitGo – AI-Powered Health & Fitness App</h3>
+                            <span class="bg-green-900/50 text-green-200 text-xs font-mono px-2 py-1 rounded border border-green-700">Full-Stack/ML</span>
+                        </div>
+                        <p class="text-gray-300 text-sm mb-4 leading-relaxed">
+                            Full-stack mobile app (React Native) with an **OpenAI-powered meal recommendation** engine. Manages user tracking and dynamically generates personalized nutrition goals.
+                        </p>
+                        <div class="space-y-2 border-t border-gray-700 pt-4">
+                            <div class="flex items-center text-sm text-gray-400">
+                                <span class="w-4 h-4 mr-2 bg-gray-700 rounded-full flex items-center justify-center text-[10px]">1</span>
+                                <span>Implemented <strong>Express/MongoDB</strong> backend services.</span>
+                            </div>
+                            <div class="flex items-center text-sm text-gray-400">
+                                <span class="w-4 h-4 mr-2 bg-gray-700 rounded-full flex items-center justify-center text-[10px]">2</span>
+                                <span>Used API to dynamically generate <strong>personalized plans</strong>.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center">
+            <div class="mb-6 md:mb-0 text-center md:text-left">
+                <h4 class="text-lg font-bold text-gray-900">Education Foundation</h4>
+                <div class="mt-2">
+                    <p class="text-gray-800 font-medium">MS in Computer Science (GPA 3.94)</p>
+                    <p class="text-gray-500 text-sm">Pace University, New York | Aug 2024 - May 2026</p>
+                </div>
+                <div class="mt-2">
+                    <p class="text-gray-800 font-medium">B.Tech in Mechanical Engineering</p>
+                    <p class="text-gray-500 text-sm">Andhra University, India | 2014 - 2018</p>
+                </div>
+            </div>
+            <div class="flex flex-col items-center md:items-end">
+                <div class="text-gray-500 text-sm mb-2">New Jersey, NJ 07306</div>
+                <div class="text-gray-500 text-sm mb-2">(201) 920-7321</div>
+                <p class="text-xs text-gray-400 mt-4">© 2025 Manohar Killamsetti. AI & Data Specialist Portfolio.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JS Logic -->
+    <script>
+        // --- DATA STORE ---
+        const experienceData = [
+            {
+                company: "Tech Mahindra (Client: Micron)",
+                role: "Software Engineer (Data/BI)",
+                period: "Feb 2023 – Aug 2024",
+                highlight: "Data Modeling and BI Automation",
+                description: "Focused on optimizing data delivery for critical BI reports. Automated ETL processes using Python, structured data within Snowflake, and maintained primary data models supporting financial reports. Achieved a 40% reduction in manual reporting time, bridging the gap between raw data and business insight.",
+                impacts: [
+                    "Achieved 40% reduction in reporting lead time via Python automation.",
+                    "Managed and optimized Tableau Server performance for executive dashboards.",
+                    "Designed and maintained the primary data model supporting financial reports."
+                ],
+                tech: ["Power BI", "Python (Pandas)", "Snowflake", "ETL Automation", "SQL"]
+            },
+            {
+                company: "Cognizant (Client: DocuSign)",
+                role: "BI Consultant (NLP Focus)",
+                period: "Jan 2022 – Jan 2023",
+                highlight: "NLP-based Metadata Structuring and BI",
+                description: "Developed BI solutions for client success teams. Beyond standard reporting, I contributed to metadata structuring and implemented Natural Language Processing (NLP) techniques to extract insights from semi-structured business documents, directly contributing to accurate BI data feeds.",
+                impacts: [
+                    "Analyzed business documents to structure metadata for NLP applications.",
+                    "Automated ETL pipelines and built foundational BI dashboards (Power BI/Tableau).",
+                    "Contributed to NLP-based insights for improved customer segmentation."
+                ],
+                tech: ["Tableau", "Power BI", "Data Modeling", "NLP", "SQL"]
+            },
+            {
+                company: "Amazon",
+                role: "Catalog Specialist (Data Quality)",
+                period: "May 2019 – Jan 2022",
+                highlight: "Data Quality and Scripting Automation",
+                description: "Ensured the integrity of massive product catalog data. This involved writing Python scripts for quality assurance (QA) and data cleansing in large document workflows, ensuring reliable, high-quality data was consistently available for operational dashboards and BI systems.",
+                impacts: [
+                    "Built Python automation scripts for QA and data cleansing (20% error reduction).",
+                    "Supported tools for structured data extraction and labeling.",
+                    "Ensured high data quality feeding into downstream BI systems."
+                ],
+                tech: ["Python", "SQL", "Data Quality", "EDA", "Excel"]
+            }
+        ];
+
+        // // --- CHART CONFIG ---
+        // const ctxRadar = document.getElementById('skillsRadarChart').getContext('2d');
+        // let radarChart;
+
+        // const skillData = {
+        //     labels: ['Generative AI/RAG', 'BI/Reporting (Power BI, DAX)', 'Data Engineering (ETL/Snowflake)', 'Data Science/ML (Scikit-learn)'],
+        //     scores: [10, 9, 8, 8], // Scoring reflects strong AI/BI focus, solid engineering foundation
+        // };
+
+        // // --- FUNCTIONS ---
+
+        // function init() {
+        //     // Init Radar Chart
+        //     radarChart = new Chart(ctxRadar, {
+        //         type: 'radar',
+        //         data: {
+        //             labels: skillData.labels,
+        //             datasets: [{
+        //                 label: 'Proficiency Score (10=Max)',
+        //                 data: skillData.scores,
+        //                 backgroundColor: 'rgba(59, 130, 246, 0.2)', // Blue 500
+        //                 borderColor: 'rgb(59, 130, 246)', 
+        //                 pointBackgroundColor: 'rgb(59, 130, 246)',
+        //                 pointBorderColor: '#fff',
+        //                 pointHoverBackgroundColor: '#fff',
+        //                 pointHoverBorderColor: 'rgb(59, 130, 246)',
+        //                 borderWidth: 2
+        //             }]
+        //         },
+        //         options: {
+        //             responsive: true,
+        //             maintainAspectRatio: false,
+        //             elements: {
+        //                 line: {
+        //                     borderWidth: 3
+        //                 }
+        //             },
+        //             scales: {
+        //                 r: {
+        //                     angleLines: { color: 'rgba(0, 0, 0, 0.1)' },
+        //                     grid: { color: 'rgba(0, 0, 0, 0.1)' },
+        //                     pointLabels: {
+        //                         font: { size: 14, weight: '600' },
+        //                         color: '#1f2937' // Gray 800
+        //                     },
+        //                     suggestedMin: 0,
+        //                     suggestedMax: 10,
+        //                     ticks: {
+        //                         display: false,
+        //                         maxTicksLimit: 5
+        //                     },
+        //                 }
+        //             },
+        //             plugins: {
+        //                 legend: { display: false },
+        //                 tooltip: {
+        //                     callbacks: {
+        //                         label: function(context) {
+        //                             return `${context.label}: ${context.raw}/10`;
+        //                         }
+        //                     }
+        //                 }
+        //             }
+        //         }
+        //     });
+
+            // Init Experience
+        //     renderExperience(0);
+        // }
+
+        function renderExperience(index) {
+            // Update Navigation Styles
+            document.querySelectorAll('.timeline-node').forEach((btn, i) => {
+                if (i === index) {
+                    btn.classList.add('active');
+                    btn.classList.remove('hover:bg-gray-50');
+                } else {
+                    btn.classList.remove('active');
+                    btn.classList.add('hover:bg-gray-50');
+                }
+            });
+
+            const data = experienceData[index];
+            const container = document.getElementById('experience-detail');
+            
+            // Build Tech Tags
+            const tags = data.tech.map(t => `<span class="inline-block bg-white border border-blue-200 text-blue-600 text-xs px-2 py-1 rounded shadow-sm">${t}</span>`).join(' ');
+
+            container.innerHTML = `
+                <div class="animate-fade-in h-full flex flex-col">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-900">${data.role}</h3>
+                            <div class="text-gray-600 font-medium text-lg">${data.company}</div>
+                        </div>
+                        <div class="bg-blue-200 text-blue-800 px-3 py-1 rounded text-xs font-bold uppercase tracking-wider">${data.period}</div>
+                    </div>
+                    
+                    <div class="mb-6 bg-white border border-gray-200 p-4 rounded-lg shadow-md">
+                        <span class="text-xs font-bold text-blue-700 uppercase block mb-1">Focus Area</span>
+                        <p class="text-gray-800 font-medium">${data.highlight}</p>
+                    </div>
+
+                    <p class="text-gray-700 mb-6 leading-relaxed">${data.description}</p>
+                    
+                    <div class="mb-6">
+                        <h4 class="text-sm font-bold text-gray-900 mb-2 uppercase tracking-wide">Key Outcomes & Technical Contributions</h4>
+                        <ul class="space-y-2">
+                            ${data.impacts.map(impact => `<li class="flex items-start"><span class="text-blue-500 mr-2">✅</span><span class="text-gray-700 text-sm">${impact}</span></li>`).join('')}
+                        </ul>
+                    </div>
+
+                    <div class="mt-auto pt-6 border-t border-blue-200 flex flex-wrap gap-2">
+                        <span class="text-sm font-semibold text-gray-700 mr-2">Tech Stack:</span>
+                        ${tags}
+                    </div>
+                </div>
+            `;
+        }
+
+        function filterProjects(type) {
+            const cards = document.querySelectorAll('.project-card');
+            cards.forEach(card => {
+                if(type === 'all' || card.dataset.type === type) {
+                    card.style.display = 'flex';
+                    card.classList.remove('animate-fade-in');
+                    void card.offsetWidth; 
+                    card.classList.add('animate-fade-in');
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+
+        // Initialize
+        window.addEventListener('load', init);
+
+    </script>
 </body>
 </html>
